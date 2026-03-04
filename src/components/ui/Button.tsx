@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
@@ -22,13 +21,12 @@ const sizes = {
 export const Button: React.FC<ButtonProps> = ({
   children, variant = 'primary', size = 'md', loading, className = '', disabled, ...props
 }) => (
-  <motion.button
-    whileTap={{ scale: 0.97 }}
-    className={`${variants[variant]} ${sizes[size]} font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+  <button
+    className={`${variants[variant]} ${sizes[size]} font-medium rounded-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     disabled={disabled || loading}
-    {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    {...props}
   >
     {loading ? <span className="animate-spin mr-2">⟳</span> : null}
     {children}
-  </motion.button>
+  </button>
 );

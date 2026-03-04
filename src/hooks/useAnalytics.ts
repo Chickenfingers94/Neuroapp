@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { db } from '../db/database';
 import { computeScoreData, computeWeeklyAverage, computeRollingAverage, computeTrainingCorrelation } from '../utils/analyticsEngine';
-import type { DailyLog, ScoreData } from '../types';
+import type { DailyLog } from '../types';
 
 export function useAnalytics(days: number = 30) {
   const [logs, setLogs] = useState<DailyLog[]>([]);

@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { getActiveInteractions, getSafetyColor, hasDangerousInteraction } from '../utils/interactionEngine';
-import type { TodayInteraction } from '../types';
 
 export function useInteractions(activeSupplementIds: string[]) {
   const interactions = useMemo(

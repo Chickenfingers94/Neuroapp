@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { db } from '../db/database';
 import { today } from '../utils/dateUtils';
-import type { DailyLog, TrainingType } from '../types';
+import type { DailyLog } from '../types';
 
 const DEFAULT_LOG: Omit<DailyLog, 'date'> = {
   sleep: 7,

@@ -65,7 +65,7 @@ export function useCycling(startDate: string, phase: Phase, isTrainingDay: boole
       statuses['lsd'] = { supplementId: 'lsd', status: lsdResult.status, reason: lsdResult.reason };
 
       // TAK-653: Do+Sa, ab Woche 16
-      const takResult = getTAK653Status(startDate, protocolWeek, date);
+      const takResult = getTAK653Status(protocolWeek, date);
       statuses['tak653'] = { supplementId: 'tak653', status: takResult.status, reason: takResult.reason };
     }
 
