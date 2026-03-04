@@ -76,6 +76,7 @@ export const TrackingPage: React.FC = () => {
             <div className="grid grid-cols-2 gap-3">
               {SCORE_ITEMS.map(item => {
                 const val = weeklyAverage[item.key];
+                // (val - 1) / 9 maps the 1–10 scale to 0%–100%
                 const pct = ((Number(val) - 1) / 9) * 100;
                 return (
                   <div key={item.key} className="bg-slate-800/50 rounded-xl p-3">

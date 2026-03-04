@@ -22,6 +22,7 @@ export const SliderScore: React.FC<SliderScoreProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Maps the 1–10 slider scale to 0%–100% fill: (value−1)/(10−1)
   const fillPct = ((value - 1) / 9) * 100;
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

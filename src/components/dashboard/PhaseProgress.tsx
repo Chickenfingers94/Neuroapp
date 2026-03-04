@@ -16,6 +16,8 @@ const PHASE_COLORS: Record<Phase, { gradient: string; text: string; glow: string
   3: { gradient: 'from-red-500 to-rose-400',     text: 'text-red-400',   glow: 'rgba(239,68,68,0.5)',  barFrom: '#ef4444', barTo: '#fb7185' },
 };
 
+const INACTIVE_SEGMENT_COLOR = 'rgba(51,65,85,0.5)'; // slate-700/50
+
 export const PhaseProgress: React.FC<PhaseProgressProps> = ({ phase, protocolWeek, progress, monitorLevel }) => {
   const c = PHASE_COLORS[phase];
 
@@ -52,7 +54,7 @@ export const PhaseProgress: React.FC<PhaseProgressProps> = ({ phase, protocolWee
               key={level}
               className="flex-1 h-3 rounded-sm"
               animate={{
-                backgroundColor: monitorLevel >= level ? c.barFrom : 'rgba(51,65,85,0.5)',
+                backgroundColor: monitorLevel >= level ? c.barFrom : INACTIVE_SEGMENT_COLOR,
                 boxShadow: monitorLevel >= level ? `0 0 6px 1px ${c.glow}` : 'none',
               }}
               transition={{ duration: 0.5 }}
