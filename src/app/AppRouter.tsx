@@ -9,15 +9,46 @@ import { SettingsPage } from '../pages/SettingsPage';
 import { HabitsPage } from '../pages/HabitsPage';
 import { SafetyPage } from '../pages/SafetyPage';
 import { OnboardingPage } from '../pages/OnboardingPage';
+import { DailyReminderPage } from '../pages/DailyReminderPage';
 import { initializeSettings, getSetting } from '../db/database';
+
+const REMINDER_KEY = 'neuroapp-reminder-dismissed';
+
+function getTodayString(): string {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function isReminderDismissedToday(): boolean {
+  try {
+    return localStorage.getItem(REMINDER_KEY) === getTodayString();
+  } catch {
+    return false;
+  }
+}
+
+function markReminderDismissed(): void {
+  try {
+    localStorage.setItem(REMINDER_KEY, getTodayString());
+  } catch {
+    // localStorage not available – silently ignore
+  }
+}
 
 export const AppRouter: React.FC = () => {
   const [onboardingDone, setOnboardingDone] = useState<boolean | null>(null);
+  const [reminderDismissed, setReminderDismissed] = useState<boolean>(false);
 
   useEffect(() => {
     initializeSettings().then(async () => {
       const done = await getSetting<boolean>('onboardingComplete');
       setOnboardingDone(done ?? false);
+      if (done) {
+        setReminderDismissed(isReminderDismissedToday());
+      }
     });
   }, []);
 
@@ -30,7 +61,25 @@ export const AppRouter: React.FC = () => {
   }
 
   if (!onboardingDone) {
-    return <OnboardingPage onComplete={() => setOnboardingDone(true)} />;
+    return (
+      <OnboardingPage
+        onComplete={() => {
+          setOnboardingDone(true);
+          setReminderDismissed(false);
+        }}
+      />
+    );
+  }
+
+  if (!reminderDismissed) {
+    return (
+      <DailyReminderPage
+        onStart={() => {
+          markReminderDismissed();
+          setReminderDismissed(true);
+        }}
+      />
+    );
   }
 
   return (
