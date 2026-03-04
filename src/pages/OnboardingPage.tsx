@@ -50,14 +50,14 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({ onComplete }) =>
       content: (
         <div className="space-y-3">
           {[
-            { phase: 1, color: 'sky', label: 'Phase 1 (Wo 1-8)', desc: 'Grundversorgung: Vitaminen, Mineralstoffe, Aminosäuren, Basis-Nootropika', count: '19 Supplements' },
-            { phase: 2, color: 'amber', label: 'Phase 2 (Wo 9-16)', desc: 'Erweiterung mit CDP-Cholin, Methylenblau und Bromantane', count: '+3 Supplements' },
-            { phase: 3, color: 'red', label: 'Phase 3 (Wo 17+)', desc: 'Advanced: PhP, 9-Me-BC, Dihexa, LSD, TAK-653', count: '+5 Supplements' },
+            { phase: 1, bg: 'bg-sky-500/10 border border-sky-500/30', text: 'text-sky-400', label: 'Phase 1 (Wo 1-8)', desc: 'Grundversorgung: Vitaminen, Mineralstoffe, Aminosäuren, Basis-Nootropika', count: '19 Supplements' },
+            { phase: 2, bg: 'bg-amber-500/10 border border-amber-500/30', text: 'text-amber-400', label: 'Phase 2 (Wo 9-16)', desc: 'Erweiterung mit CDP-Cholin, Methylenblau und Bromantane', count: '+3 Supplements' },
+            { phase: 3, bg: 'bg-red-500/10 border border-red-500/30', text: 'text-red-400', label: 'Phase 3 (Wo 17+)', desc: 'Advanced: PhP, 9-Me-BC, Dihexa, LSD, TAK-653', count: '+5 Supplements' },
           ].map(p => (
-            <div key={p.phase} className={`bg-${p.color}-500/10 border border-${p.color}-500/30 rounded-xl p-4`}>
+            <div key={p.phase} className={`${p.bg} rounded-xl p-4`}>
               <div className="flex items-center justify-between mb-1">
-                <span className={`text-sm font-bold text-${p.color}-400`}>{p.label}</span>
-                <span className={`text-xs font-mono text-${p.color}-400`}>{p.count}</span>
+                <span className={`text-sm font-bold ${p.text}`}>{p.label}</span>
+                <span className={`text-xs font-mono ${p.text}`}>{p.count}</span>
               </div>
               <p className="text-xs text-slate-400">{p.desc}</p>
             </div>
