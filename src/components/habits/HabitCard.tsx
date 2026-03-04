@@ -21,7 +21,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, log, onToggle, getS
   }, [habit.id, getStreak, log]);
 
   return (
-    <div className={`glass-card p-3 flex items-center gap-3 w-full transition-all duration-200 ${
+    <div className={`glass-card p-2.5 flex items-center gap-3 w-full transition-all duration-200 ${
       isCompleted ? 'border-green-500/30 bg-green-500/5' : 'hover:border-white/15'
     }`}>
       <motion.button
@@ -30,15 +30,12 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, log, onToggle, getS
         className="flex items-center gap-3 flex-1 text-left"
         aria-label={`${habit.name} ${isCompleted ? 'abgehakt' : 'nicht abgehakt'}`}
       >
-        <span className="text-2xl shrink-0">{habit.emoji}</span>
+        <span className="text-xl shrink-0">{habit.emoji}</span>
         <div className="flex-1 min-w-0">
           <p className={`text-sm font-medium ${isCompleted ? 'text-green-400' : 'text-slate-200'}`}>
             {habit.name}
           </p>
           <div className="flex items-center gap-2">
-            {habit.neuroBenefit && (
-              <p className="text-xs text-slate-500 truncate">{habit.neuroBenefit}</p>
-            )}
             {frequencyLabel && (
               <span className="text-xs text-slate-600 shrink-0">{frequencyLabel}</span>
             )}
