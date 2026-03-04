@@ -8,12 +8,12 @@ interface CycleResult {
   weekInMacro?: number;
 }
 
-function daysSinceStart(startDate: string): number {
-  return Math.max(0, differenceInDays(new Date(), parseDate(startDate)));
+function daysSinceStart(startDate: string, now: Date = new Date()): number {
+  return Math.max(0, differenceInDays(now, parseDate(startDate)));
 }
 
-function weeksSinceStart(startDate: string): number {
-  return Math.floor(daysSinceStart(startDate) / 7);
+function weeksSinceStart(startDate: string, now: Date = new Date()): number {
+  return Math.floor(daysSinceStart(startDate, now) / 7);
 }
 
 export function getMethylenblauStatus(date: Date = new Date()): CycleResult {
@@ -57,9 +57,9 @@ export function getBromantaneCycle(startDate: string, date: Date = new Date()): 
   return { status: 'active', reason: 'Mo-Fr aktiv', weekInMacro: cyclePos + 1 };
 }
 
-export function getDihexaCycle(startDate: string, isTrainingDay: boolean, _date: Date = new Date()): CycleResult {
+export function getDihexaCycle(startDate: string, isTrainingDay: boolean, date: Date = new Date()): CycleResult {
   // Macro: 4 weeks on / 4 weeks off
-  const weeks = weeksSinceStart(startDate);
+  const weeks = weeksSinceStart(startDate, date);
   const cyclePos = weeks % 8;
   const inMacroOn = cyclePos < 4;
 
@@ -72,9 +72,9 @@ export function getDihexaCycle(startDate: string, isTrainingDay: boolean, _date:
   return { status: 'active', reason: 'Trainingstag + Macro-On' };
 }
 
-export function getLSDCycle(startDate: string, _date: Date = new Date()): CycleResult {
+export function getLSDCycle(startDate: string, date: Date = new Date()): CycleResult {
   // Fadiman: 1 day on / 2 days off (every 3rd day)
-  const days = daysSinceStart(startDate);
+  const days = daysSinceStart(startDate, date);
   const cyclePos = days % 3;
   if (cyclePos === 0) {
     return { status: 'active', reason: 'Fadiman: Tag 1 von 3' };
@@ -90,7 +90,7 @@ export function getPhenylpiracetamStatus(date: Date = new Date()): CycleResult {
   return { status: 'inactive', reason: 'Nur Mo+Mi' };
 }
 
-export function getTAK653Status(_startDate: string, protocolWeek: number, date: Date = new Date()): CycleResult {
+export function getTAK653Status(protocolWeek: number, date: Date = new Date()): CycleResult {
   if (protocolWeek < 16) {
     return { status: 'not-started', reason: `Erst ab Woche 16 (aktuell Woche ${protocolWeek})` };
   }

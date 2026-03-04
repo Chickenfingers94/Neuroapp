@@ -1,4 +1,5 @@
-import { format, differenceInDays, addDays, isMonday, isTuesday, isWednesday, isFriday, isSaturday, isThursday, getDay } from 'date-fns';
+import { format, differenceInDays, addDays, getDay } from 'date-fns';
+export { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, addDays, differenceInDays } from 'date-fns';
 
 export const today = (): string => format(new Date(), 'yyyy-MM-dd');
 export const formatDate = (date: Date): string => format(date, 'yyyy-MM-dd');
@@ -49,5 +50,3 @@ export function formatDayName(dateStr: string): string {
   const days = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
   return days[getDay(d)];
 }
-
-export { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, addDays, differenceInDays };

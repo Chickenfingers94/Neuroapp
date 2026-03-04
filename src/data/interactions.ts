@@ -10,14 +10,10 @@ export const INTERACTION_RULES: InteractionRule[] = [
   // DANGER
   { substances: ['5htp', 'methylenblau'], level: 'danger', description: 'Serotonin-Syndrom-Risiko!' },
   { substances: ['5htp', 'lsd'], level: 'danger', description: 'Serotonin-Überschuss!' },
-  { substances: ['9mebc', 'methylenblau'], level: 'danger', description: 'Doppelte MAO-Hemmung → Tyramin-Krise!' },
-  { substances: ['methylenblau', '9mebc'], level: 'danger', description: 'Doppelte MAO-Hemmung → Serotonin-Syndrom-Risiko!' },
+  { substances: ['9mebc', 'methylenblau'], level: 'danger', description: 'Doppelte MAO-Hemmung → Tyramin-Krise + Serotonin-Syndrom-Risiko!' },
   { substances: ['tak653', 'phenylpiracetam'], level: 'danger', description: 'Glutamat-Überlast!' },
-  { substances: ['phenylpiracetam', 'tak653'], level: 'danger', description: 'Glutamat-Überlast!' },
   { substances: ['tak653', '9mebc'], level: 'danger', description: 'Glutamat + DA Überaktivierung!' },
-  { substances: ['9mebc', 'tak653'], level: 'danger', description: 'Glutamat + DA Überaktivierung!' },
   { substances: ['lsd', 'methylenblau'], level: 'danger', description: 'Serotonin-Kaskade!' },
-  { substances: ['methylenblau', 'lsd'], level: 'danger', description: 'Serotonin-Kaskade!' },
   // CAUTION
   { substances: ['5htp', 'l-tyrosin'], level: 'caution', description: 'AADC-Konkurrenz – ≥2h Abstand einhalten' },
   { substances: ['bromantane', 'bromantane'], level: 'caution', description: '>4 Wochen täglich → Toleranzentwicklung' },
