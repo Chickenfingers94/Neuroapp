@@ -47,6 +47,19 @@ export function useSettings() {
     setSettings(prev => ({ ...prev, [key]: value }));
   }, []);
 
+  const resetAllData = useCallback(async () => {
+    await Promise.all([
+      db.dailyLogs.clear(),
+      db.checklistCompletions.clear(),
+      db.habits.clear(),
+      db.habitLogs.clear(),
+      db.todos.clear(),
+      db.settings.clear(),
+    ]);
+    localStorage.clear();
+    window.location.reload();
+  }, []);
+
   const exportData = useCallback(async () => {
     const [dailyLogs, checklistCompletions, habits, habitLogs, todos] = await Promise.all([
       db.dailyLogs.toArray(),
@@ -65,5 +78,5 @@ export function useSettings() {
     URL.revokeObjectURL(url);
   }, [settings]);
 
-  return { settings, loading, update, exportData };
+  return { settings, loading, update, exportData, resetAllData };
 }

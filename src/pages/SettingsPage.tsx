@@ -1,14 +1,16 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import { Modal } from '../components/ui/Modal';
 import { useSettings } from '../hooks/useSettings';
 import { getProtocolWeek } from '../utils/dateUtils';
 import type { Phase, StrategyMode } from '../types';
 
 export const SettingsPage: React.FC = () => {
-  const { settings, update, exportData } = useSettings();
+  const { settings, update, exportData, resetAllData } = useSettings();
+  const [showResetModal, setShowResetModal] = useState(false);
   const protocolWeek = getProtocolWeek(settings.startDate);
 
   const handlePhaseChange = useCallback((phase: Phase) => {
@@ -97,8 +99,33 @@ export const SettingsPage: React.FC = () => {
               <Button variant="secondary" className="w-full" onClick={exportData}>
                 📤 Daten exportieren (JSON)
               </Button>
+              <button
+                onClick={() => setShowResetModal(true)}
+                className="w-full text-sm font-medium rounded-lg px-4 py-2 transition-all active:scale-95 bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20"
+              >
+                🗑️ Werkseinstellungen
+              </button>
             </div>
           </Card>
+
+          <Modal
+            isOpen={showResetModal}
+            onClose={() => setShowResetModal(false)}
+            title="Alle Daten löschen?"
+          >
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+              Alle Tracking-Daten, Habits, Checklisten, Einstellungen und Fortschritt werden
+              unwiderruflich gelöscht. Die App wird auf den Ausgangszustand zurückgesetzt.
+            </p>
+            <div className="flex gap-3">
+              <Button variant="secondary" className="flex-1" onClick={() => setShowResetModal(false)}>
+                Abbrechen
+              </Button>
+              <Button variant="danger" className="flex-1" onClick={resetAllData}>
+                Alles löschen
+              </Button>
+            </div>
+          </Modal>
 
           {/* About */}
           <Card>
