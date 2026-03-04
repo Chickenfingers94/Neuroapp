@@ -15,7 +15,6 @@ const EMERGENCY_INFO = [
   { symptom: 'Nasale Reizung (Selank/Semax)', action: 'Dosis reduzieren auf 250µg. 1 Tag Pause. Isotonische Kochsalzlösung zur Spülung.', severity: 'caution' as const },
   { symptom: 'Schlafstörungen', action: 'Stimulanzien früher einnehmen. Mg/Passionsblume/Theanin abends hochdosieren.', severity: 'caution' as const },
   { symptom: 'Extremer Fokus/Unruhe nach LSD', action: 'L-Theanin 400mg. Keine weitere Stimulation. Spaziergehen.', severity: 'caution' as const },
-  { symptom: 'UV-Exposition mit 9-Me-BC', action: '9-Me-BC-Tag immer mit Sonnenschutz! Bei Exposition: Antioxidantien erhöhen.', severity: 'danger' as const },
 ];
 
 export const SafetyPage: React.FC = () => {
@@ -96,11 +95,8 @@ export const SafetyPage: React.FC = () => {
           <Card>
             <h3 className="text-sm font-bold text-slate-300 mb-3">🚫 Absolute Kontraindikationen</h3>
             <div className="space-y-2 text-xs text-slate-400">
-              <p>• 9-Me-BC + Methylenblau → NIEMALS gleichzeitig (MAO-Kollision)</p>
               <p>• 5-HTP + Methylenblau → NIEMALS kombinieren (Serotonin-Syndrom)</p>
-              <p>• 9-Me-BC + TAK-653 → NIEMALS kombinieren</p>
               <p>• Selank/Semax + 5-HTP → NUR in Off-Wochen</p>
-              <p>• UV-Licht an 9-Me-BC Tagen → Starken Sonnenschutz verwenden</p>
               <p>• TAK-653 &gt;1mg in Kombination → NIEMALS</p>
             </div>
           </Card>

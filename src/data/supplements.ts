@@ -122,9 +122,8 @@ export const SUPPLEMENTS: Supplement[] = [
     mechanism: 'Direkter Dopamin-Precursor über TH+AADC-Weg; LAT1-Transporter konkurriert mit anderen LNAA',
     effects: ['Dopaminsynthese', 'Fokus', 'Stressresistenz', 'Arbeitsspeicher'],
     riskLevel: 'safe',
-    criticalNote: 'NÜCHTERN 30min vor Frühstück einnehmen (LAT1-Transporter). Mit 9-Me-BC auf 500mg reduzieren!',
+    criticalNote: 'NÜCHTERN 30min vor Frühstück einnehmen (LAT1-Transporter).',
     interactions: [
-      { with: '9mebc', level: 'caution', description: 'DA-Akkumulation – auf 500mg reduzieren' },
       { with: '5htp', level: 'caution', description: 'AADC-Konkurrenz – ≥2h Abstand einhalten' },
     ],
     synergies: ['bromantane', 'b-komplex'],
@@ -294,9 +293,8 @@ export const SUPPLEMENTS: Supplement[] = [
     interactions: [
       { with: '5htp', level: 'danger', description: 'Serotonin-Syndrom-Risiko!' },
       { with: 'lsd', level: 'danger', description: 'Serotonin-Kaskade!' },
-      { with: '9mebc', level: 'danger', description: 'Doppelte MAO-Hemmung → Tyramin-Krise!' },
     ],
-    criticalNote: 'NUR Mo+Do! 9-Me-BC ist Di+Fr um MAO-Kollision zu vermeiden.',
+    criticalNote: 'NUR Mo+Do!',
     category: 'Nootropika',
   },
   {
@@ -345,7 +343,6 @@ export const SUPPLEMENTS: Supplement[] = [
     synergies: ['passionsblume', 'nac-morgens', 'tak653', 'selank'],
     interactions: [
       { with: 'tak653', level: 'caution', description: 'Beide Glutamat-modulierend – Fasoracetam niedrig halten (20mg) an TAK-Tagen' },
-      { with: '9mebc', level: 'caution', description: 'Beide beeinflussen Glutamat-System – Dosis nicht erhöhen an 9-Me-BC Tagen' },
     ],
     criticalNote: 'Ab Woche 5. Start: 20mg 2x/Tag, steigern auf 50mg 2x/Tag. 5d on / 2d off (synchron mit Bromantane). Fasoracetam = mGluR-Thermostat macht TAK-653 SICHERER.',
     category: 'Racetame',
@@ -353,36 +350,16 @@ export const SUPPLEMENTS: Supplement[] = [
 
   // ========== PHASE 3 ==========
   {
-    id: '9mebc',
-    name: '9-Me-BC',
-    nameFull: '9-Methyl-β-Carbolin',
-    phase: 3,
-    dose: '15mg',
-    timing: ['morgens'],
-    mechanism: 'MAO-A/B Hemmer, DA-Neuronen-Regeneration, steigert TH-Expression, BDNF-fördernd',
-    effects: ['Dopamin-Neurogenese', 'MAO-Hemmung', 'TH-Upregulation', 'Neuroprotektiv'],
-    riskLevel: 'research-only',
-    cycling: { microCycle: 'di+fr', macroCycle: { onWeeks: 2, offWeeks: 4 } },
-    interactions: [
-      { with: 'methylenblau', level: 'danger', description: 'Doppelte MAO-Hemmung → Tyramin-Krise!' },
-      { with: 'lsd', level: 'caution', description: 'MAO + 5-HT2A – Serotonin-Risiko' },
-      { with: 'tak653', level: 'danger', description: 'Glutamat + DA Überaktivierung!' },
-      { with: 'l-tyrosin', level: 'caution', description: 'DA-Akkumulation – L-Tyrosin auf 500mg reduzieren' },
-    ],
-    criticalNote: 'PHOTOSENSITIV! UV-Licht meiden. Di+Fr (NICHT Mo+Do – das sind MB-Tage!). 2 Wo on / 4 Wo off.',
-    category: 'Beta-Carboline',
-  },
-  {
     id: 'acd856',
     name: 'ACD-856 (Trianaxyl)',
     phase: 3,
     dose: 'Niedrig starten (orientiert an Phase-1-Humandaten)',
     timing: ['morgens'],
-    mechanism: 'Positiver Allosterischer Modulator (PAM) des TrkB-Rezeptors. Potenziert BDNF→TrkB Signaling OHNE BDNF-Spiegel zu erhöhen → gleiche Menge BDNF = STÄRKERE Signalkaskade. MULTIPLIKATOR für ALLE BDNF-steigernden Interventionen (Sport, Semax, LSD, Lion\'s Mane, 9-Me-BC). Phase-1-Humanstudie (AlzeCure, 2023): Gut toleriert, lineare PK, orale Bioverfügbarkeit + ZNS-Penetration bestätigt.',
+    mechanism: 'Positiver Allosterischer Modulator (PAM) des TrkB-Rezeptors. Potenziert BDNF→TrkB Signaling OHNE BDNF-Spiegel zu erhöhen → gleiche Menge BDNF = STÄRKERE Signalkaskade. MULTIPLIKATOR für ALLE BDNF-steigernden Interventionen (Sport, Semax, LSD, Lion\'s Mane). Phase-1-Humanstudie (AlzeCure, 2023): Gut toleriert, lineare PK, orale Bioverfügbarkeit + ZNS-Penetration bestätigt.',
     effects: ['TrkB-Sensitivierung', 'BDNF-Multiplikator', 'Neuroplastizität ↑↑', 'Lernkonsolidierung', 'Cholinerge Transmission ↑'],
     riskLevel: 'research-only',
     cycling: { microCycle: 'daily', macroCycle: { onWeeks: 4, offWeeks: 2 } },
-    synergies: ['semax', 'lsd', 'lionsmane', '9mebc', 'sport'],
+    synergies: ['semax', 'lsd', 'lionsmane', 'sport'],
     criticalNote: 'Ab Woche 13. 4 Wochen on → 2 Wochen off. Experimentellste Substanz im Stack.',
     category: 'TrkB-Modulatoren',
   },
@@ -399,7 +376,6 @@ export const SUPPLEMENTS: Supplement[] = [
     interactions: [
       { with: 'methylenblau', level: 'danger', description: 'Serotonin-Kaskade!' },
       { with: '5htp', level: 'danger', description: 'Serotonin-Überschuss!' },
-      { with: '9mebc', level: 'caution', description: 'MAO + 5-HT2A Serotonin-Risiko' },
     ],
     criticalNote: 'Fadiman-Protokoll: 1 Tag on / 2 Tage off. 10µg sublingual.',
     category: 'Psychedelika',
@@ -415,7 +391,6 @@ export const SUPPLEMENTS: Supplement[] = [
     riskLevel: 'research-only',
     cycling: { microCycle: 'mi+sa', startWeek: 16 },
     interactions: [
-      { with: '9mebc', level: 'danger', description: 'Glutamat + DA Überaktivierung!' },
       { with: 'methylenblau', level: 'caution', description: 'AMPA-Potenzierung + MAO-Hemmung – suboptimale Kombination.' },
     ],
     criticalNote: 'IMMER 1mg bei Kombination – NIEMALS 2mg! Erst ab Woche 16. Mi+Sa.',

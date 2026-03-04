@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import {
   getMethylenblauStatus,
-  get9MeBCCycle,
   getBromantaneCycle,
   getPeptideCycle,
   getFasoracetamStatus,
@@ -61,10 +60,6 @@ export function useCycling(startDate: string, phase: Phase, isTrainingDay: boole
     }
 
     if (phase >= 3) {
-      // 9-Me-BC: Di+Fr + 2w/4w macro
-      const mebcResult = get9MeBCCycle(startDate, date);
-      statuses['9mebc'] = { supplementId: '9mebc', status: mebcResult.status, reason: mebcResult.reason, weekInCycle: mebcResult.weekInMacro };
-
       // ACD-856: daily in on-phase, 4w/2w macro
       const acdResult = getACD856Cycle(startDate, date);
       statuses['acd856'] = { supplementId: 'acd856', status: acdResult.status, reason: acdResult.reason, weekInCycle: acdResult.weekInMacro };
