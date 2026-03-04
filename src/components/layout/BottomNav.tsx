@@ -11,7 +11,7 @@ const TABS = [
 ];
 
 export const BottomNav: React.FC = () => (
-  <nav className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-md border-t border-white/10">
+  <nav className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-md border-t border-white/10" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
     <div className="flex items-stretch justify-around max-w-2xl mx-auto">
       {TABS.map(tab => (
         <NavLink
@@ -19,7 +19,7 @@ export const BottomNav: React.FC = () => (
           to={tab.path}
           end={tab.path === '/'}
           className={({ isActive }) =>
-            `flex flex-col items-center justify-center py-2 px-3 flex-1 transition-colors duration-200 ${
+            `flex flex-col items-center justify-center py-1.5 px-2 flex-1 transition-colors duration-200 ${
               isActive ? 'text-sky-400' : 'text-slate-500 hover:text-slate-300'
             }`
           }
@@ -33,7 +33,7 @@ export const BottomNav: React.FC = () => (
               >
                 {tab.icon}
               </motion.span>
-              <span className="text-xs mt-0.5 font-medium">{tab.label}</span>
+              <span className="text-[10px] mt-0.5 font-medium">{tab.label}</span>
             </>
           )}
         </NavLink>

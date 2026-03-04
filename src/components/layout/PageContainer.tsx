@@ -6,7 +6,7 @@ interface PageContainerProps {
 }
 
 export const PageContainer: React.FC<PageContainerProps> = ({ children, className = '' }) => (
-  <main className={`max-w-2xl mx-auto px-4 pb-24 pt-4 ${className}`}>
+  <main className={`max-w-2xl mx-auto px-4 pt-4 ${className}`} style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}>
     {children}
   </main>
 );
