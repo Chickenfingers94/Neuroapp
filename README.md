@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# 🧠 Neuroapp v3.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **Neurobiological Supplement & Habit Tracker** PWA — dark-mode-first, fully offline, installable.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Phase-Based Protocol**: 3 phases (24+ weeks), 27 supplements with medically-correct data
+- **Cycling Engine**: Automatic ON/OFF scheduling (Methylenblau Mo+Do, 9-Me-BC Di+Fr, Bromantane 5on/2off + 4w/1w macro, Fadiman LSD protocol, TAK-653 from week 16+)
+- **Interaction Engine**: DANGER/CAUTION/SYNERGY detection with automatic warnings
+- **Daily Checklist**: Supplements grouped by time-of-day (nüchtern/morgens/nachmittags/abends)
+- **Wellbeing Tracking**: Sleep, focus, mood, energy sliders (1-10) with Recharts analytics
+- **Habit Tracker**: 7 neurobiological system habits + custom habits with streak counters
+- **Safety Dashboard**: Real-time interaction warnings, emergency protocol, contraindications
+- **Offline-First PWA**: All data local via IndexedDB (Dexie.js), installable
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18 + TypeScript (strict mode) + Vite
+- Tailwind CSS v4 (dark mode first)
+- Dexie.js (IndexedDB)
+- Recharts, Framer Motion
+- vite-plugin-pwa (offline, installable)
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev      # Development server
+npm run build    # Production build
+npm run preview  # Preview production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚠️ Medical Disclaimer
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This app does not replace medical advice. Phase 2 and 3 substances are experimental and intended for research purposes. Consult a physician before starting any advanced supplement protocol.
