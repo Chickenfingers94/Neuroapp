@@ -10,9 +10,9 @@ import { useDailyLog } from '../hooks/useDailyLog';
 import { today } from '../utils/dateUtils';
 
 const EMERGENCY_INFO = [
-  { symptom: 'Kieferspannung / unwillkürliche Bewegungen', action: 'TAK-653 & PhP sofort stoppen. Keine weiteren Substanzen heute.', severity: 'danger' as const },
-  { symptom: 'Angst, Panik, Herzrasen', action: 'Alle stimulierenden Substanzen stoppen. L-Theanin 200mg. Ruhe suchen.', severity: 'danger' as const },
-  { symptom: 'Kopfschmerzen nach PhP', action: 'CDP-Cholin 250mg. Nächste Dosis um 48h verschieben.', severity: 'caution' as const },
+  { symptom: 'Kieferspannung / unwillkürliche Bewegungen', action: 'TAK-653 sofort stoppen. Keine weiteren Substanzen heute. Fasoracetam 20mg als Sicherheitsnetz.', severity: 'danger' as const },
+  { symptom: 'Angst, Panik, Herzrasen', action: 'Alle stimulierenden Substanzen stoppen. L-Theanin 200mg. Selank-Nasenspray (anxiolytisch). Ruhe suchen.', severity: 'danger' as const },
+  { symptom: 'Nasale Reizung (Selank/Semax)', action: 'Dosis reduzieren auf 250µg. 1 Tag Pause. Isotonische Kochsalzlösung zur Spülung.', severity: 'caution' as const },
   { symptom: 'Schlafstörungen', action: 'Stimulanzien früher einnehmen. Mg/Passionsblume/Theanin abends hochdosieren.', severity: 'caution' as const },
   { symptom: 'Extremer Fokus/Unruhe nach LSD', action: 'L-Theanin 400mg. Keine weitere Stimulation. Spaziergehen.', severity: 'caution' as const },
   { symptom: 'UV-Exposition mit 9-Me-BC', action: '9-Me-BC-Tag immer mit Sonnenschutz! Bei Exposition: Antioxidantien erhöhen.', severity: 'danger' as const },
@@ -98,8 +98,8 @@ export const SafetyPage: React.FC = () => {
             <div className="space-y-2 text-xs text-slate-400">
               <p>• 9-Me-BC + Methylenblau → NIEMALS gleichzeitig (MAO-Kollision)</p>
               <p>• 5-HTP + Methylenblau → NIEMALS kombinieren (Serotonin-Syndrom)</p>
-              <p>• TAK-653 + Phenylpiracetam → NIEMALS an gleichem Tag</p>
               <p>• 9-Me-BC + TAK-653 → NIEMALS kombinieren</p>
+              <p>• Selank/Semax + 5-HTP → NUR in Off-Wochen</p>
               <p>• UV-Licht an 9-Me-BC Tagen → Starken Sonnenschutz verwenden</p>
               <p>• TAK-653 &gt;1mg in Kombination → NIEMALS</p>
             </div>

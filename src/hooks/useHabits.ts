@@ -66,5 +66,24 @@ export function useHabits() {
     setHabits(prev => [...prev, newHabit]);
   }, []);
 
-  return { habits, todayLogs, loading, toggleHabit, getStreak, addCustomHabit, reload: loadData };
+  const updateHabit = useCallback(async (id: string, updates: Partial<Omit<Habit, 'id' | 'isSystem'>>) => {
+    await db.habits.update(id, updates);
+    setHabits(prev => prev.map(h => h.id === id ? { ...h, ...updates } : h));
+  }, []);
+
+  const deleteHabit = useCallback(async (id: string) => {
+    await db.habits.update(id, { active: false });
+    setHabits(prev => prev.filter(h => h.id !== id));
+  }, []);
+
+  const reorderHabits = useCallback(async (orderedIds: string[]) => {
+    const updates = orderedIds.map((id, index) => db.habits.update(id, { order: index + 1 }));
+    await Promise.all(updates);
+    setHabits(prev => {
+      const sorted = [...prev].sort((a, b) => orderedIds.indexOf(a.id) - orderedIds.indexOf(b.id));
+      return sorted.map((h, i) => ({ ...h, order: i + 1 }));
+    });
+  }, []);
+
+  return { habits, todayLogs, loading, toggleHabit, getStreak, addCustomHabit, updateHabit, deleteHabit, reorderHabits, reload: loadData };
 }

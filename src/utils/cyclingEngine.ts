@@ -57,19 +57,37 @@ export function getBromantaneCycle(startDate: string, date: Date = new Date()): 
   return { status: 'active', reason: 'Mo-Fr aktiv', weekInMacro: cyclePos + 1 };
 }
 
-export function getDihexaCycle(startDate: string, isTrainingDay: boolean, date: Date = new Date()): CycleResult {
-  // Macro: 4 weeks on / 4 weeks off
+export function getPeptideCycle(startDate: string, date: Date = new Date()): CycleResult {
+  // Macro: 3 weeks on / 1 week off
   const weeks = weeksSinceStart(startDate, date);
-  const cyclePos = weeks % 8;
+  const cyclePos = weeks % 4;
+  const inMacroOn = cyclePos < 3;
+
+  if (!inMacroOn) {
+    return { status: 'pause', reason: 'Macro-Pause (1 Woche off)', weekInMacro: cyclePos + 1 };
+  }
+  return { status: 'active', reason: `Woche ${cyclePos + 1}/3 aktiv`, weekInMacro: cyclePos + 1 };
+}
+
+export function getFasoracetamStatus(date: Date = new Date()): CycleResult {
+  const dow = getDay(date);
+  const isWeekend = dow === 0 || dow === 6;
+  if (isWeekend) {
+    return { status: 'inactive', reason: 'Wochenende – Pause (synchron mit Bromantane)' };
+  }
+  return { status: 'active', reason: 'Mo-Fr aktiv' };
+}
+
+export function getACD856Cycle(startDate: string, date: Date = new Date()): CycleResult {
+  // Macro: 4 weeks on / 2 weeks off
+  const weeks = weeksSinceStart(startDate, date);
+  const cyclePos = weeks % 6;
   const inMacroOn = cyclePos < 4;
 
   if (!inMacroOn) {
-    return { status: 'pause', reason: `Macro-Pause (Woche ${cyclePos - 3}/4)`, weekInMacro: cyclePos + 1 };
+    return { status: 'pause', reason: `Macro-Pause (Woche ${cyclePos - 3}/2)`, weekInMacro: cyclePos + 1 };
   }
-  if (!isTrainingDay) {
-    return { status: 'inactive', reason: 'Nur an Trainingstagen' };
-  }
-  return { status: 'active', reason: 'Trainingstag + Macro-On' };
+  return { status: 'active', reason: `Woche ${cyclePos + 1}/4 aktiv`, weekInMacro: cyclePos + 1 };
 }
 
 export function getLSDCycle(startDate: string, date: Date = new Date()): CycleResult {
@@ -82,23 +100,15 @@ export function getLSDCycle(startDate: string, date: Date = new Date()): CycleRe
   return { status: 'inactive', reason: `Fadiman: Pause (Tag ${cyclePos + 1} von 3)` };
 }
 
-export function getPhenylpiracetamStatus(date: Date = new Date()): CycleResult {
-  const dow = getDay(date); // 1=Mon, 3=Wed
-  if (dow === 1 || dow === 3) {
-    return { status: 'active', reason: 'Mo+Mi aktiv' };
-  }
-  return { status: 'inactive', reason: 'Nur Mo+Mi' };
-}
-
 export function getTAK653Status(protocolWeek: number, date: Date = new Date()): CycleResult {
   if (protocolWeek < 16) {
     return { status: 'not-started', reason: `Erst ab Woche 16 (aktuell Woche ${protocolWeek})` };
   }
-  const dow = getDay(date); // 4=Thu, 6=Sat
-  if (dow === 4 || dow === 6) {
-    return { status: 'active', reason: 'Do+Sa aktiv' };
+  const dow = getDay(date); // 3=Wed, 6=Sat
+  if (dow === 3 || dow === 6) {
+    return { status: 'active', reason: 'Mi+Sa aktiv' };
   }
-  return { status: 'inactive', reason: 'Nur Do+Sa' };
+  return { status: 'inactive', reason: 'Nur Mi+Sa' };
 }
 
 export function getZinkStatus(date: Date = new Date()): CycleResult {

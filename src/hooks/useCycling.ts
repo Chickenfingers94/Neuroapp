@@ -3,9 +3,10 @@ import {
   getMethylenblauStatus,
   get9MeBCCycle,
   getBromantaneCycle,
-  getDihexaCycle,
+  getPeptideCycle,
+  getFasoracetamStatus,
+  getACD856Cycle,
   getLSDCycle,
-  getPhenylpiracetamStatus,
   getTAK653Status,
   getZinkStatus,
   get5HTPStatus,
@@ -37,6 +38,10 @@ export function useCycling(startDate: string, phase: Phase, isTrainingDay: boole
     const htpResult = get5HTPStatus(date);
     statuses['5htp'] = { supplementId: '5htp', status: htpResult.status, reason: htpResult.reason };
 
+    // Phase 1: Selank peptide cycle (3w on / 1w off)
+    const selankResult = getPeptideCycle(startDate, date);
+    statuses['selank'] = { supplementId: 'selank', status: selankResult.status, reason: selankResult.reason, weekInCycle: selankResult.weekInMacro };
+
     if (phase >= 2) {
       // Methylenblau: Mo+Do
       const mbResult = getMethylenblauStatus(date);
@@ -45,26 +50,30 @@ export function useCycling(startDate: string, phase: Phase, isTrainingDay: boole
       // Bromantane: 5on2off + 4w/1w
       const bromResult = getBromantaneCycle(startDate, date);
       statuses['bromantane'] = { supplementId: 'bromantane', status: bromResult.status, reason: bromResult.reason, weekInCycle: bromResult.weekInMacro };
+
+      // Semax peptide cycle (3w on / 1w off, synchron mit Selank)
+      const semaxResult = getPeptideCycle(startDate, date);
+      statuses['semax'] = { supplementId: 'semax', status: semaxResult.status, reason: semaxResult.reason, weekInCycle: semaxResult.weekInMacro };
+
+      // Fasoracetam: 5d on / 2d off (synchron mit Bromantane)
+      const fasoResult = getFasoracetamStatus(date);
+      statuses['fasoracetam'] = { supplementId: 'fasoracetam', status: fasoResult.status, reason: fasoResult.reason };
     }
 
     if (phase >= 3) {
-      // Phenylpiracetam: Mo+Mi
-      const phpResult = getPhenylpiracetamStatus(date);
-      statuses['phenylpiracetam'] = { supplementId: 'phenylpiracetam', status: phpResult.status, reason: phpResult.reason };
-
       // 9-Me-BC: Di+Fr + 2w/4w macro
       const mebcResult = get9MeBCCycle(startDate, date);
       statuses['9mebc'] = { supplementId: '9mebc', status: mebcResult.status, reason: mebcResult.reason, weekInCycle: mebcResult.weekInMacro };
 
-      // Dihexa: training days + 4w/4w
-      const dihexaResult = getDihexaCycle(startDate, isTrainingDay, date);
-      statuses['dihexa'] = { supplementId: 'dihexa', status: dihexaResult.status, reason: dihexaResult.reason };
+      // ACD-856: daily in on-phase, 4w/2w macro
+      const acdResult = getACD856Cycle(startDate, date);
+      statuses['acd856'] = { supplementId: 'acd856', status: acdResult.status, reason: acdResult.reason, weekInCycle: acdResult.weekInMacro };
 
       // LSD: Fadiman 1/2
       const lsdResult = getLSDCycle(startDate, date);
       statuses['lsd'] = { supplementId: 'lsd', status: lsdResult.status, reason: lsdResult.reason };
 
-      // TAK-653: Do+Sa, ab Woche 16
+      // TAK-653: Mi+Sa, ab Woche 16
       const takResult = getTAK653Status(protocolWeek, date);
       statuses['tak653'] = { supplementId: 'tak653', status: takResult.status, reason: takResult.reason };
     }

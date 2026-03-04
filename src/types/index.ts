@@ -9,7 +9,7 @@ export type StrategyMode = 'conservative' | 'experimental';
 export type Theme = 'dark' | 'light' | 'auto';
 
 export interface CyclingRule {
-  microCycle?: 'daily' | '5on2off' | 'mo+do' | 'di+fr' | 'mo+mi' | 'do+sa' | 'fadiman' | 'training' | '3x-week' | 'mo-mi-fr' | 'mi-fr-so';
+  microCycle?: 'daily' | '5on2off' | 'mo+do' | 'di+fr' | 'mo+mi' | 'do+sa' | 'mi+sa' | 'fadiman' | 'training' | '3x-week' | 'mo-mi-fr' | 'mi-fr-so';
   macroCycle?: { onWeeks: number; offWeeks: number };
   startWeek?: number; // minimum week to start (e.g., 16 for TAK-653)
 }
