@@ -19,6 +19,14 @@ export class NeuroDatabase extends Dexie {
       habitLogs: '++id, habitId, date, [habitId+date]',
       todos: '++id, completed, priority',
     });
+    this.version(2).stores({
+      dailyLogs: 'date',
+      checklistCompletions: '++id, date, itemId, [date+itemId]',
+      settings: 'key',
+      habits: 'id, order',
+      habitLogs: '++id, habitId, date, [habitId+date]',
+      todos: '++id, priority',
+    });
   }
 }
 
