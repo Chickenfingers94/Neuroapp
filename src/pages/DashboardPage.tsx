@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Header } from '../components/layout/Header';
 import { PageContainer } from '../components/layout/PageContainer';
 import { PhaseProgress } from '../components/dashboard/PhaseProgress';
@@ -6,6 +7,7 @@ import { TodayScores } from '../components/dashboard/TodayScores';
 import { WarningBanner } from '../components/dashboard/WarningBanner';
 import { SafetyStatus } from '../components/safety/SafetyStatus';
 import { HabitCard } from '../components/habits/HabitCard';
+import { DailyReminderPage } from './DailyReminderPage';
 import { useSettings } from '../hooks/useSettings';
 import { usePhase } from '../hooks/usePhase';
 import { useCycling } from '../hooks/useCycling';
@@ -21,6 +23,7 @@ export const DashboardPage: React.FC = () => {
   const { activeTodayIds } = useCycling(settings.startDate, settings.phase, isTrainingDay);
   const { interactions, safetyColor } = useInteractions(activeTodayIds);
   const { habits, todayLogs, toggleHabit, getStreak } = useHabits();
+  const [showReminder, setShowReminder] = useState(false);
 
   const dateDisplay = useMemo(() => formatDisplayDate(today()), []);
 
@@ -35,6 +38,19 @@ export const DashboardPage: React.FC = () => {
       />
       <PageContainer>
         <div className="space-y-4">
+
+          {/* Daily Reminder Quick Access */}
+          <button
+            onClick={() => setShowReminder(true)}
+            className="w-full glass-card p-3 flex items-center gap-3 text-left active:scale-95 transition-all duration-200"
+          >
+            <span className="text-2xl">🧠</span>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-white">Täglicher Reminder</p>
+              <p className="text-xs text-slate-500">Deine 6 Wahrheiten – jederzeit abrufbar</p>
+            </div>
+            <span className="text-slate-600 ml-auto text-lg">→</span>
+          </button>
 
           {/* Phase Progress */}
           <PhaseProgress
@@ -88,6 +104,20 @@ export const DashboardPage: React.FC = () => {
 
         </div>
       </PageContainer>
+
+      <AnimatePresence>
+        {showReminder && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-slate-950 overflow-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <DailyReminderPage onStart={() => setShowReminder(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
