@@ -16,6 +16,15 @@ import { useDailyLog } from '../hooks/useDailyLog';
 import { useHabits } from '../hooks/useHabits';
 import { today, formatDisplayDate } from '../utils/dateUtils';
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.07, duration: 0.35, ease: 'easeOut' as const },
+  }),
+};
+
 export const DashboardPage: React.FC = () => {
   const { settings } = useSettings();
   const { protocolWeek, phaseProgress, monitorLevel } = usePhase(settings.startDate, settings.phase);
@@ -40,9 +49,14 @@ export const DashboardPage: React.FC = () => {
         <div className="space-y-4">
 
           {/* Daily Reminder Quick Access */}
-          <button
+          <motion.button
+            custom={0}
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            whileTap={{ scale: 0.97 }}
             onClick={() => setShowReminder(true)}
-            className="w-full glass-card p-3 flex items-center gap-3 text-left active:scale-95 transition-all duration-200"
+            className="w-full glass-card p-3 flex items-center gap-3 text-left"
           >
             <span className="text-2xl">🧠</span>
             <div className="min-w-0">
@@ -50,26 +64,34 @@ export const DashboardPage: React.FC = () => {
               <p className="text-xs text-slate-500">Deine 6 Wahrheiten – jederzeit abrufbar</p>
             </div>
             <span className="text-slate-600 ml-auto text-lg">→</span>
-          </button>
+          </motion.button>
 
           {/* Phase Progress */}
-          <PhaseProgress
-            phase={settings.phase}
-            protocolWeek={protocolWeek}
-            progress={phaseProgress}
-            monitorLevel={monitorLevel}
-          />
+          <motion.div custom={1} variants={cardVariants} initial="hidden" animate="visible">
+            <PhaseProgress
+              phase={settings.phase}
+              protocolWeek={protocolWeek}
+              progress={phaseProgress}
+              monitorLevel={monitorLevel}
+            />
+          </motion.div>
 
           {/* Safety / Warnings */}
-          <WarningBanner interactions={interactions} />
-          <SafetyStatus interactions={interactions} safetyColor={safetyColor} />
+          <motion.div custom={2} variants={cardVariants} initial="hidden" animate="visible">
+            <WarningBanner interactions={interactions} />
+          </motion.div>
+          <motion.div custom={3} variants={cardVariants} initial="hidden" animate="visible">
+            <SafetyStatus interactions={interactions} safetyColor={safetyColor} />
+          </motion.div>
 
           {/* Today's Scores */}
-          <TodayScores log={log} onUpdate={update} />
+          <motion.div custom={4} variants={cardVariants} initial="hidden" animate="visible">
+            <TodayScores log={log} onUpdate={update} />
+          </motion.div>
 
           {/* Habits */}
           {habits.length > 0 && (
-            <div>
+            <motion.div custom={5} variants={cardVariants} initial="hidden" animate="visible">
               <h2 className="text-sm font-semibold text-slate-400 mb-2 flex items-center gap-2">
                 🎯 Gewohnheiten heute
               </h2>
@@ -84,23 +106,25 @@ export const DashboardPage: React.FC = () => {
                   />
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Active Supplements Today */}
-          <div className="glass-card p-4">
-            <h3 className="text-sm font-semibold text-slate-300 mb-3">⚗️ Heute aktive Substanzen</h3>
-            <div className="flex flex-wrap gap-1.5">
-              {activeTodayIds.map(id => (
+          <motion.div custom={6} variants={cardVariants} initial="hidden" animate="visible">
+            <div className="glass-card p-4">
+              <h3 className="text-sm font-semibold text-slate-300 mb-3">⚗️ Heute aktive Substanzen</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {activeTodayIds.map(id => (
                   <span key={id} className="text-xs bg-sky-500/10 text-sky-400 border border-sky-500/20 px-2 py-0.5 rounded-full font-mono">
                     {id}
                   </span>
-              ))}
+                ))}
+              </div>
+              {activeTodayIds.length === 0 && (
+                <p className="text-xs text-slate-500">Keine Substanzen heute aktiv.</p>
+              )}
             </div>
-            {activeTodayIds.length === 0 && (
-              <p className="text-xs text-slate-500">Keine Substanzen heute aktiv.</p>
-            )}
-          </div>
+          </motion.div>
 
         </div>
       </PageContainer>
@@ -109,10 +133,10 @@ export const DashboardPage: React.FC = () => {
         {showReminder && (
           <motion.div
             className="fixed inset-0 z-50 bg-slate-950 overflow-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             <DailyReminderPage onStart={() => setShowReminder(false)} />
           </motion.div>
