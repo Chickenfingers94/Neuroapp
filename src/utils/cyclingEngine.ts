@@ -24,21 +24,6 @@ export function getMethylenblauStatus(date: Date = new Date()): CycleResult {
   return { status: 'inactive', reason: 'Nur Mo+Do' };
 }
 
-export function get9MeBCCycle(startDate: string, date: Date = new Date()): CycleResult {
-  const dow = getDay(date); // 2=Tue, 5=Fri
-  // Check macro cycle: 2 weeks on / 4 weeks off
-  const weeks = weeksSinceStart(startDate);
-  const cyclePos = weeks % 6; // 0-1 = on, 2-5 = off
-  const inMacroOn = cyclePos < 2;
-
-  if (!inMacroOn) {
-    return { status: 'pause', reason: `Macro-Pause (Woche ${cyclePos + 1}/6)`, weekInMacro: cyclePos + 1 };
-  }
-  if (dow === 2 || dow === 5) {
-    return { status: 'active', reason: 'Di+Fr aktiv', weekInMacro: cyclePos + 1 };
-  }
-  return { status: 'inactive', reason: 'Nur Di+Fr', weekInMacro: cyclePos + 1 };
-}
 
 export function getBromantaneCycle(startDate: string, date: Date = new Date()): CycleResult {
   const dow = getDay(date);

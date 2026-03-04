@@ -52,7 +52,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({ onComplete }) =>
           {[
             { phase: 1, bg: 'bg-sky-500/10 border border-sky-500/30', text: 'text-sky-400', label: 'Phase 1 (Wo 1-8)', desc: 'Grundversorgung: Vitamine, Mineralien, Aminosäuren, Selank Nasenspray', count: '20 Supplements' },
             { phase: 2, bg: 'bg-amber-500/10 border border-amber-500/30', text: 'text-amber-400', label: 'Phase 2 (Wo 5-16)', desc: 'Erweiterung: CDP-Cholin, Methylenblau, Bromantane, Semax, Fasoracetam', count: '+5 Supplements' },
-            { phase: 3, bg: 'bg-red-500/10 border border-red-500/30', text: 'text-red-400', label: 'Phase 3 (Wo 13+)', desc: 'Advanced: 9-Me-BC, LSD, TAK-653, ACD-856', count: '+4 Supplements' },
+            { phase: 3, bg: 'bg-red-500/10 border border-red-500/30', text: 'text-red-400', label: 'Phase 3 (Wo 13+)', desc: 'Advanced: LSD, TAK-653, ACD-856', count: '+3 Supplements' },
           ].map(p => (
             <div key={p.phase} className={`${p.bg} rounded-xl p-4`}>
               <div className="flex items-center justify-between mb-1">

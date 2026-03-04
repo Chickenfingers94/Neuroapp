@@ -10,18 +10,13 @@ export const INTERACTION_RULES: InteractionRule[] = [
   // DANGER
   { substances: ['5htp', 'methylenblau'], level: 'danger', description: 'Serotonin-Syndrom-Risiko!' },
   { substances: ['5htp', 'lsd'], level: 'danger', description: 'Serotonin-Überschuss!' },
-  { substances: ['9mebc', 'methylenblau'], level: 'danger', description: 'Doppelte MAO-Hemmung → Tyramin-Krise + Serotonin-Syndrom-Risiko!' },
-  { substances: ['tak653', '9mebc'], level: 'danger', description: 'Glutamat + DA Überaktivierung!' },
   { substances: ['lsd', 'methylenblau'], level: 'danger', description: 'Serotonin-Kaskade!' },
   // CAUTION
   { substances: ['5htp', 'l-tyrosin'], level: 'caution', description: 'AADC-Konkurrenz – ≥2h Abstand einhalten' },
   { substances: ['bromantane', 'bromantane'], level: 'caution', description: '>4 Wochen täglich → Toleranzentwicklung' },
-  { substances: ['9mebc', 'lsd'], level: 'caution', description: 'MAO + 5-HT2A – Serotonin-Risiko' },
-  { substances: ['l-tyrosin', '9mebc'], level: 'caution', description: 'DA-Akkumulation – L-Tyrosin auf 500mg reduzieren' },
   { substances: ['5htp', 'selank'], level: 'caution', description: '5-HTP NUR in Selank Off-Wochen!' },
   { substances: ['5htp', 'semax'], level: 'caution', description: '5-HTP NUR in Semax Off-Wochen!' },
   { substances: ['fasoracetam', 'tak653'], level: 'caution', description: 'Beide Glutamat-modulierend – Fasoracetam niedrig halten (20mg) an TAK-Tagen. Fasoracetam = Sicherheitsnetz.' },
-  { substances: ['fasoracetam', '9mebc'], level: 'caution', description: 'Beide beeinflussen Glutamat-System – Fasoracetam-Dosis nicht erhöhen an 9-Me-BC Tagen.' },
   { substances: ['tak653', 'methylenblau'], level: 'caution', description: 'AMPA-Potenzierung + MAO-Hemmung – suboptimale Kombination.' },
   // SYNERGY
   { substances: ['creatin', 'cdp-cholin'], level: 'synergy', description: 'Energie + ACh' },
