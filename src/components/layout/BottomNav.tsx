@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 const TABS = [
   { path: '/', label: 'Dashboard', icon: '🧠' },
   { path: '/checklist', label: 'Checklist', icon: '✅' },
+  { path: '/habits', label: 'Habits', icon: '🎯' },
   { path: '/tracking', label: 'Tracking', icon: '📊' },
-  { path: '/knowledge', label: 'Wissen', icon: '📚' },
   { path: '/settings', label: 'Settings', icon: '⚙️' },
 ];
 

@@ -87,4 +87,16 @@ export const SYSTEM_HABITS: Habit[] = [
     order: 7,
     active: true,
   },
+  {
+    id: 'lesen',
+    name: 'Lesen',
+    emoji: '📖',
+    description: 'Mindestens 20 Minuten lesen (Fachliteratur, Bücher, Dokumentation)',
+    frequency: 'daily',
+    trackingType: 'boolean',
+    isSystem: true,
+    neuroBenefit: 'Stärkt Sprachzentren, verbessert Arbeitsgedächtnis, fördert fokussierte Aufmerksamkeit und deklaratives Gedächtnis',
+    order: 8,
+    active: true,
+  },
 ];
