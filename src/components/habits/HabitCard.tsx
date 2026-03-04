@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { Habit, HabitLog } from '../../types';
 
 interface HabitCardProps {
@@ -21,34 +21,63 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, log, onToggle, getS
   }, [habit.id, getStreak, log]);
 
   return (
-    <div className={`glass-card p-2.5 flex items-center gap-3 w-full transition-all duration-200 ${
-      isCompleted ? 'border-green-500/30 bg-green-500/5' : 'hover:border-white/15'
-    }`}>
+    <motion.div
+      layout
+      className={`glass-card p-2.5 flex items-center gap-3 w-full transition-colors duration-300 ${
+        isCompleted ? 'border-green-500/30 bg-green-500/[0.06]' : ''
+      }`}
+    >
       <motion.button
-        whileTap={{ scale: 0.97 }}
+        whileTap={{ scale: 0.96 }}
         onClick={onToggle}
         className="flex items-center gap-3 flex-1 text-left"
         aria-label={`${habit.name} ${isCompleted ? 'abgehakt' : 'nicht abgehakt'}`}
       >
-        <span className="text-xl shrink-0">{habit.emoji}</span>
+        <motion.span
+          className="text-xl shrink-0"
+          animate={isCompleted ? { scale: [1, 1.3, 1] } : { scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {habit.emoji}
+        </motion.span>
         <div className="flex-1 min-w-0">
-          <p className={`text-sm font-medium ${isCompleted ? 'text-green-400' : 'text-slate-200'}`}>
+          <p className={`text-sm font-medium transition-colors duration-200 ${isCompleted ? 'text-green-400' : 'text-slate-200'}`}>
             {habit.name}
           </p>
-          <div className="flex items-center gap-2">
-            {frequencyLabel && (
-              <span className="text-xs text-slate-600 shrink-0">{frequencyLabel}</span>
-            )}
-          </div>
+          {frequencyLabel && (
+            <span className="text-xs text-slate-600">{frequencyLabel}</span>
+          )}
         </div>
         <div className="flex flex-col items-end gap-1 shrink-0">
-          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-            isCompleted ? 'bg-green-500 border-green-500' : 'border-slate-600'
-          }`}>
-            {isCompleted && <span className="text-white text-xs">✓</span>}
-          </div>
+          <motion.div
+            animate={isCompleted ? { scale: [1, 1.2, 1], backgroundColor: '#22c55e', borderColor: '#22c55e' } : { scale: 1 }}
+            transition={{ duration: 0.25 }}
+            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+              isCompleted ? 'bg-green-500 border-green-500' : 'border-slate-600'
+            }`}
+          >
+            <AnimatePresence>
+              {isCompleted && (
+                <motion.span
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  className="text-white text-xs"
+                >
+                  ✓
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.div>
           {streak > 0 && (
-            <span className="text-xs font-mono text-amber-400">🔥{streak}</span>
+            <motion.span
+              key={streak}
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="text-xs font-mono text-amber-400"
+            >
+              🔥{streak}
+            </motion.span>
           )}
         </div>
       </motion.button>
@@ -74,6 +103,6 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, log, onToggle, getS
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
